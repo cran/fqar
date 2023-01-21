@@ -55,9 +55,32 @@ ambrose_summary <- assessment_list_glance(ambrose)
 rock_garden_phys <- transect_phys(rock_garden)
 glimpse(rock_garden_phys)
 
-## ----missouri plot, warning = FALSE-------------------------------------------
-ggplot(missouri, aes(x = `Native Species`, 
-                     y = `Native Mean C`)) +
+## ----analysis, results = 'hide'-----------------------------------------------
+# Obtain a tidy data frame of all co-occurrences in the 1995 Southern Ontario database:
+ontario <- download_assessment_list(database = 2)
+
+# Extract inventories as a list:
+ontario_invs <- assessment_list_inventory(ontario)
+
+# Enumerate all co-occurrences in this database:
+ontario_cooccurrences <- assessment_cooccurrences(ontario_invs)
+
+# Summarize co-occurrences in this database, one row per target species:
+ontario_cooccurrences <- assessment_cooccurrences_summary(ontario_invs)
+
+## ----profile, fig.width=4.5---------------------------------------------------
+aster_profile <- species_profile("Aster lateriflorus", 
+                                 ontario_invs,
+                                 native = TRUE)
+aster_profile
+
+species_profile_plot("Aster lateriflorus", 
+                     ontario_invs,
+                     native = TRUE)
+
+## ----missouri plot, warning = FALSE, fig.width=4.5----------------------------
+ggplot(missouri, aes(x = native_species, 
+                     y = native_mean_c)) +
   geom_point() +
   geom_smooth() +
   scale_x_continuous(trans = "log10") +
