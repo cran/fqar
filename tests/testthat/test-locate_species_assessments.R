@@ -1,11 +1,13 @@
-test_that("index_fqa_assessments works", {
+test_that("locate_species_assessment works", {
 
-  expect_error(index_fqa_assessments(1.5))
-  expect_error(index_fqa_assessments("hi"))
+  expect_error(locate_species_assessment(2, 5))
+  expect_error(locate_species_assessment("hi", 1.5))
+  expect_error(locate_species_assessment("hi"))
 
   skip_on_cran()
 
-  assessments <- index_fqa_assessments(2)
+  species <- "Anemone canadensis"
+  assessments <- locate_species_assessments(species, 2)
 
   expect_equal(ncol(assessments), 5)
   expect_equal(names(assessments),

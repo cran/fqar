@@ -33,7 +33,6 @@
 #' @export
 
 
-
 species_profile_plot <-
   function(species, inventory_list, native = FALSE) {
     if (!is_inventory_list(inventory_list)) {
@@ -48,6 +47,7 @@ species_profile_plot <-
       included[inventory] <-
         (species %in% inventory_list[[inventory]]$scientific_name)
     } # gives a logical vector indicating which inventories include the given species
+    # currently ignores the possibility that a species is included twice with different C
 
     if (sum(included) == 0) {
       stop("Species does not appear in any assessment. No profile plot generated.",
@@ -89,13 +89,13 @@ species_profile_plot <-
       dplyr::mutate(species, target_c) |>
       dplyr::select(species,
                     target_c,
-                    cospecies_c = .data$c,
-                    cospecies_n = .data$n)
+                    cospecies_c = "c",
+                    cospecies_n = "n")
 
     if (native == TRUE){
       plot_title <- "native co-occurrence profile"} else {
         plot_title <- "co-occurrence profile"
-        }
+      }
 
     ggplot2::ggplot(c_counts, ggplot2::aes(x = .data$cospecies_c,
                                            y = .data$cospecies_n)) +

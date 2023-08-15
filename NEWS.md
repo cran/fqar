@@ -1,3 +1,15 @@
+# fqar 0.4.0
+
+## New features
+
+* New `transect_subplot_inventories` function for extracting species data from quadrat-level data in transect inventories.
+
+* New function `transect_list_inventory` for extracting multiple transect-level species inventories simultaneously.
+
+## Other improvements
+
+* Improvements to `assessment_cooccurrence` and `assessment_cooccurrence_summary` which now treat species with the same name but different C-values as distinct.
+
 # fqar 0.3.0
 
 ## New features
@@ -9,7 +21,7 @@
 ## Other improvements
 
 * memoization for all `download\_*` functions, which generally run slowly due to limitations of the [universalfqa.org](https://universalfqa.org/) website.
-* all data frame produced now have syntactic column names ( for instance, `total_mean_c` instead of `Total Mean C`).
+* all data frame produced now have syntactic column names (for instance, `total_mean_c` instead of `Total Mean C`).
 
 
 # fqar 0.2.1

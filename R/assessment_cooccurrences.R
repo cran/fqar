@@ -87,18 +87,25 @@ assessment_cooccurrences <- function(inventory_list) {
   for (sp in seq_along(species_df$species)) {
     included <- vector("logical")
     for (inventory in seq_along(inventory_list)) {
-      included[inventory] <-
-        (species_df$species[sp] %in% inventory_list[[inventory]]$scientific_name)
+        index1 <- grepl(species_df$species[sp], inventory_list[[inventory]]$scientific_name) # matches name
+        index2 <- grepl(species_df$species_c[sp], inventory_list[[inventory]]$c) # matches c
+        included[inventory] <- any(index1 & index2)
     } # gives a logical vector indicating which inventories include the given species
 
     target_species_n <-
       sum(included) # number of assessments that include the target species
+    if (target_species_n == 0 | is.na(target_species_n)){ # why would this ever be NA??
+      next
+      }
 
     short_list <- inventory_list[included]
     short_list_combined <- bind_rows(short_list)
 
-    short_list_combined <- dplyr::filter(short_list_combined,
-                                         .data$scientific_name != species_df$species[sp]) # ignoring self-cooccurrence
+    short_list_combined <- short_list_combined[short_list_combined$scientific_name != species_df$species[sp], ]
+    # Still an issue with empty dfs, it appears.
+    # this happens when the species matches but the c-value doesn't
+    # short_list_combined <- dplyr::filter(short_list_combined,
+    #                                      "scientific_name" != species_df$species[sp]) # ignoring self-cooccurrence
 
     short_list_combined <- cbind(
       rep(species_df$species[sp],
