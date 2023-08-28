@@ -12,8 +12,7 @@
 #'   \item description (character)
 #' }
 #'
-#' @import jsonlite httr
-#' @importFrom memoise memoise
+#' @importFrom memoise forget
 #'
 #' @examples
 #' databases <- index_fqa_databases()
@@ -21,37 +20,28 @@
 #' @export
 
 
-index_fqa_databases <- memoise::memoise(function() {
-  databases_address <- "http://universalfqa.org/get/database/"
-  ua <-
-    httr::user_agent("https://github.com/equitable-equations/fqar")
+index_fqa_databases <- function() {
 
-  databases_get <- httr::GET(databases_address, ua)
+  out <- tryCatch(index_fqa_databases_internal(),
+                  warning = function(w) {
+                    warning(w)
+                    memoise::forget(index_fqa_databases_internal)
+                    return(invisible(NULL))
+                  },
+                  message = function(m) {
+                    message(m)
+                    memoise::forget(index_fqa_databases_internal)
+                    return(invisible(NULL))
+                  }
+  )
 
-  if (httr::http_error(databases_get)) {
-    stop(
-      paste(
-        "API request to universalFQA.org failed. Error",
-        httr::status_code(databases_get)
-      ),
-      call. = FALSE
-    )
+  if (is.null(out)){
+    memoise::forget(index_fqa_databases_internal)
   }
 
-  databases_text <- httr::content(databases_get,
-                                  "text",
-                                  encoding = "ISO-8859-1")
-  databases_json <- jsonlite::fromJSON(databases_text)
-  list_data <- databases_json[[2]]
-  databases <- as.data.frame(list_data)
+  out
 
-  databases[, c(1, 3)] <- lapply(databases[, c(1, 3)], as.double)
-  colnames(databases) <- c("database_id",
-                           "region", "year",
-                           "description")
-  class(databases) <- c("tbl_df",
-                        "tbl",
-                        "data.frame")
+}
 
-  databases
-})
+
+

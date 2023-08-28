@@ -28,6 +28,7 @@ numbers for assessments in various databases can be found using the
 }
 \examples{
 \donttest{
+
 databases <- index_fqa_databases()
 # Note database 1 is the original 1994 Chicago edition.
 

@@ -18,8 +18,7 @@
 #'   \item practitioner (character)
 #'   }
 #'
-#' @import jsonlite httr
-#' @importFrom memoise memoise
+#' @importFrom memoise drop_cache
 #'
 #' @examples
 #' \donttest{
@@ -30,60 +29,29 @@
 #'
 #' @export
 
-index_fqa_assessments <- memoise(function(database_id) {
-  if (!is.numeric(database_id)) {
-    stop(
-      "database_id must be an integer corresponding to an existing FQA database. Use index_fqa_databases() to obtain a data frame of valid options.",
-      call. = FALSE
-    )
-  }
-  if (database_id %% 1 != 0) {
-    stop(
-      "database_id must be an integer corresponding to an existing FQA database. Use index_fqa_databases() to obtain a data frame of valid options.",
-      call. = FALSE
-    )
-  }
 
-  assessments_address <-
-    paste0("http://universalfqa.org/get/database/",
-           database_id,
-           "/inventory")
-  ua <-
-    httr::user_agent("https://github.com/equitable-equations/fqar")
+index_fqa_assessments <- function(database_id) {
+  out <- tryCatch(index_fqa_assessments_internal(database_id),
+                  warning = function(w) {
+                    warning(w)
+                    memoise::drop_cache(index_fqa_assessments_internal)({{ database_id }})
+                    return(invisible(NULL))
+                  },
+                  message = function(m) {
+                    message(m)
+                    memoise::drop_cache(index_fqa_assessments_internal)({{ database_id }})
+                    return(invisible(NULL))
+                  }
+  )
 
-  assessments_get <- httr::GET(assessments_address, ua)
-  if (httr::http_error(assessments_get)) {
-    stop(
-      paste(
-        "API request to universalFQA.org failed. Error",
-        httr::status_code(assessments_get)
-      ),
-      call. = FALSE
-    )
-  }
-  assessments_text <- httr::content(assessments_get,
-                                    "text",
-                                    encoding = "ISO-8859-1")
-  assessments_json <- jsonlite::fromJSON(assessments_text)
-  list_data <- assessments_json[[2]]
-
-  inventories_summary <- as.data.frame(list_data)
-
-  if (nrow(inventories_summary) == 0) {
-    stop("no data associated with specified database_id.", call. = FALSE)
+  if (is.null(out)){
+    memoise::drop_cache(index_fqa_assessments_internal)({{ database_id }})
   }
 
-  colnames(inventories_summary) <- c("id", "assessment",
-                                     "date",
-                                     "site",
-                                     "practitioner")
-  inventories_summary$id <- as.double(inventories_summary$id)
-  inventories_summary$date[inventories_summary$date == "0000-00-00"] <-
-    NA
-  inventories_summary$date <- as.Date(inventories_summary$date)
-  class(inventories_summary) <- c("tbl_df",
-                                  "tbl",
-                                  "data.frame")
+  out
 
-  inventories_summary
-})
+}
+
+
+
+

@@ -17,11 +17,11 @@
 #'   \code{\link[=assessment_inventory]{assessment_inventory()}} for
 #'   species-level data.
 #'
-#' @import jsonlite httr
-#' @importFrom memoise memoise
+#' @importFrom memoise drop_cache
 #'
 #' @examples
 #' \donttest{
+#'
 #' databases <- index_fqa_databases()
 #' # Note database 1 is the original 1994 Chicago edition.
 #'
@@ -34,48 +34,26 @@
 #'
 #' @export
 
-download_assessment <- memoise::memoise(function(assessment_id) {
-  if (!is.numeric(assessment_id)) {
-    stop("assessment_id must be an integer.", call. = FALSE)
-  }
-  if (assessment_id %% 1 != 0) {
-    stop("assessment_id must be an integer.", call. = FALSE)
-  }
+download_assessment <- function(assessment_id) {
 
-  assessment_address <-
-    paste0("http://universalfqa.org/get/inventory/",
-           assessment_id)
-  ua <-
-    httr::user_agent("https://github.com/equitable-equations/fqar")
+  out <- tryCatch(download_assessment_internal(assessment_id),
+                  warning = function(w) {
+                    warning(w)
+                    memoise::drop_cache(download_assessment_internal)({{ assessment_id }})
+                    return(invisible(NULL))
+                  },
+                  message = function(m) {
+                    message(m)
+                    memoise::drop_cache(download_assessment_internal)({{ assessment_id }})
+                    return(invisible(NULL))
+                  }
+  )
 
-  assessment_get <- httr::GET(assessment_address, ua)
-  if (httr::http_error(assessment_get)) {
-    stop(
-      paste(
-        "API request to universalFQA.org failed. Error",
-        httr::status_code(assessment_get)
-      ),
-      call. = FALSE
-    )
-  }
-  assessment_text <- httr::content(assessment_get,
-                                   "text",
-                                   encoding = "ISO-8859-1")
-  assessment_json <- jsonlite::fromJSON(assessment_text)
-  list_data <- assessment_json[[2]]
-
-  if ((list_data[[1]] == "The requested assessment is not public") &
-      (!is.na(list_data[[1]]))) {
-    stop("The requested assessment is not public", call. = FALSE)
+  if (is.null(out)){
+    memoise::drop_cache(download_assessment_internal)({{ assessment_id }})
+    return(invisible(NULL))
   }
 
-  max_length <-
-    max(unlist(lapply(list_data, length))) # determines how wide the df must be
-  list_data <- lapply(list_data,
-                      function(x) {
-                        length(x) <- max_length
-                        unlist(x)
-                      })
+  out
+}
 
-  as.data.frame(do.call(rbind, list_data))
-})

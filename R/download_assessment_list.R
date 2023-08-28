@@ -28,6 +28,7 @@
 #'
 #' @import dplyr utils
 #' @importFrom memoise has_cache
+#' @importFrom rlang is_interactive
 #'
 #' @examples
 #' \donttest{
@@ -40,7 +41,12 @@
 
 
 download_assessment_list <- function(database_id, ...) {
+
   inventories_summary <- index_fqa_assessments(database_id)
+
+  if (is.null(inventories_summary)){
+    return(invisible(NULL))
+  }
 
   inventories_requested <- inventories_summary |>
     dplyr::filter(...)
@@ -48,12 +54,11 @@ download_assessment_list <- function(database_id, ...) {
   number_needed <- length(inventories_requested$id) -
     sum(vapply(
       inventories_requested$id,
-      memoise::has_cache(download_assessment),
+      memoise::has_cache(download_assessment_internal),
       FUN.VALUE = FALSE
     ))
 
-  if (number_needed >= 5) {
-    message("Downloading...")
+  if (number_needed >= 5 && rlang::is_interactive()) {
     results <- list(0)
     pb <- utils::txtProgressBar(
       min = 0,
@@ -72,8 +77,9 @@ download_assessment_list <- function(database_id, ...) {
                       download_assessment)
   }
 
-  if (length(results) == 0)
+  if (length(results) == 0){
     warning("No matches found. Empty list returned.", call. = FALSE)
+  }
 
   results
 }

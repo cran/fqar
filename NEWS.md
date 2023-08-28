@@ -1,3 +1,11 @@
+# fqar 0.4.1
+
+* Fixed non-ascii character in the chicago data set
+
+* Fixed bug that caused progress bars to appear in non-interactive calls
+
+* Improved responses to API failure
+
 # fqar 0.4.0
 
 ## New features
