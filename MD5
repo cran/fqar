@@ -1,7 +1,7 @@
-305d5d06b98cc647eec4cdaf0d7f3d80 *DESCRIPTION
+f24e46b5978febfe079c6fdfc41f85dc *DESCRIPTION
 f3372fe5764e62c0b31a8f4aa0cd23d3 *LICENSE
 786ccc21d52d944a6bba1965091e8d77 *NAMESPACE
-5640dcc0da7c646652283fd5429a4f14 *NEWS.md
+c3f64edbbc4aa62bde7ae1c57b1f0e69 *NEWS.md
 4ffefc568c728fbf8635ed7c950ffb69 *R/assessment_cooccurrences.R
 e0a8a17e1d7cead2c158e246b11d18ea *R/assessment_cooccurrences_summary.R
 1d501a1bfa4ac5023065b6dd587374e9 *R/assessment_glance.R
@@ -24,7 +24,7 @@ c090965f62002cc6a65c330c79545f58 *R/index_fqa_assessments.R
 476c69e08406b31abf922ff1c64eb741 *R/index_fqa_databases.R
 31c62488dd6f0580d563af950114d4b3 *R/index_fqa_databases_internal.R
 237e66888c29211d623d5e304a642d3f *R/index_fqa_transects.R
-c8f363ec8d23eaa95f3b898d1d7af1d0 *R/index_fqa_transects_internal.R
+650b35b887edb4725ed30f9ed9a4485d *R/index_fqa_transects_internal.R
 2ce994e43bfcb3348264399e65a0c0c5 *R/is_assessment_list.R
 0a97d4ab8854bd37be73d14ed78b4e46 *R/is_inventory_list.R
 b22b5cd76ceaa295b6e5d8c32414a501 *R/is_transect_list.R
@@ -36,7 +36,7 @@ c91416b146c2141ad325feb1c62adfa2 *R/species_nativity.R
 672a22da9705ceb0ea06de38a22e8022 *R/species_profile.R
 651483dce6a342202809f68809609627 *R/species_profile_plot.R
 88b206160980a03c28922ff1e77213f1 *R/species_w.R
-b21661598162b19b4dec4d2d9658c255 *R/sysdata.rda
+ddafb62a697c96291658e32ba9cf3c6a *R/sysdata.rda
 543d518ea99dbce35f8ca463ef4da3ad *R/transect_glance.R
 7ec38c0db55684cad40baeda207e57a8 *R/transect_inventory.R
 247353973391a70a729dd10ca0530aaf *R/transect_list_glance.R
@@ -44,11 +44,11 @@ b21661598162b19b4dec4d2d9658c255 *R/sysdata.rda
 2ab209110a5813a5e1e180eabd8be006 *R/transect_phys.R
 ae9dbf95215c4cafdbd9e7dac3937c8a *R/transect_subplot_inventories.R
 28b232e760ec4612694a93f868cd5d9e *build/vignette.rds
-25085923a217c37d7f6e5fbcd11fffa0 *data/chicago.rda
-eb359e2fa6eb26e8beb8f4f4078c2fb8 *data/missouri.rda
-5f2284f001fe3265d610a195123769bd *inst/doc/fqar.R
-24d624c7a412d5fcc95faef9ce1ebbf0 *inst/doc/fqar.Rmd
-4725f6047aa701e9178e76e924a397e7 *inst/doc/fqar.html
+59ae7f4f1bd65b845917f45ca4865b1c *data/chicago.rda
+792552ee177e47ae559c6e9e0d697af5 *data/missouri.rda
+ea99020add1ab709461c6ca4c7f1b355 *inst/doc/fqar.R
+b7c37cd7a6bd25ec2392184efe6284ef *inst/doc/fqar.Rmd
+bef1e0852d068889c67654d1ef0ca632 *inst/doc/fqar.html
 d31131d095f0067f09ade9d668727bc2 *man/assessment_cooccurrences.Rd
 6e10d9f911e79cc4e784684720b88d6b *man/assessment_cooccurrences_summary.Rd
 0f9ec4e8c8ae29180e52e76f9d29a315 *man/assessment_glance.Rd
@@ -98,7 +98,7 @@ dc7fd18fd9c3b54b509b509938f074c7 *tests/testthat/test-download_assessment.R
 1a9b2286d3413284b3c98abf3f1d6cc7 *tests/testthat/test-download_database_internal.R
 ce387df32c63218ad80faaad642d4773 *tests/testthat/test-download_transect.R
 aaa1a90c6983a976996edb8f3f193004 *tests/testthat/test-download_transect_internal.R
-7c67976cc6edef67a296a7ece645b950 *tests/testthat/test-download_transect_list.R
+bac6cd51ac54b0c8db730a5d485a3232 *tests/testthat/test-download_transect_list.R
 648306f22c848f9c34d166458ebf5fca *tests/testthat/test-index_fqa_assessments.R
 a880528bc73a0de456afc6423270d81b *tests/testthat/test-index_fqa_assessments_internal.R
 41542f36cf0823f4251484aa51844ea7 *tests/testthat/test-index_fqa_databases.R
@@ -123,4 +123,8 @@ df2c0bc98448c3a6cfb10693b7e11d86 *tests/testthat/test-species_profile.R
 6953237ce8297b75fe58c15fb479e664 *tests/testthat/test-transect_phys.R
 ebd5b23103ceacacf65e5e281ca68d6a *tests/testthat/test-transect_subplot_inventories.R
 3eb96144b1b4a63ae7cb16181e5c84ea *tests/testthat/testthat-problems.rds
-24d624c7a412d5fcc95faef9ce1ebbf0 *vignettes/fqar.Rmd
+9e8f7d4b06aaef366f4328c642c1c3a2 *vignettes/fqar
+b7c37cd7a6bd25ec2392184efe6284ef *vignettes/fqar.Rmd
+acd6329b383901c3fccfc609d1bee343 *vignettes/missouri_plot.png
+6be8211a001cfff53d044e564a201456 *vignettes/profile.png
+3acc2b4776d96ef9035d1fbca3cb4d2d *vignettes/vignette_notes
