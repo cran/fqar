@@ -1,10 +1,10 @@
-f24e46b5978febfe079c6fdfc41f85dc *DESCRIPTION
+e6ef45707df8543852257d9dd259f416 *DESCRIPTION
 f3372fe5764e62c0b31a8f4aa0cd23d3 *LICENSE
 786ccc21d52d944a6bba1965091e8d77 *NAMESPACE
-c3f64edbbc4aa62bde7ae1c57b1f0e69 *NEWS.md
+35edd3602803ded972a98ad168b939dd *NEWS.md
 4ffefc568c728fbf8635ed7c950ffb69 *R/assessment_cooccurrences.R
 e0a8a17e1d7cead2c158e246b11d18ea *R/assessment_cooccurrences_summary.R
-1d501a1bfa4ac5023065b6dd587374e9 *R/assessment_glance.R
+adc5126cff4dbde3de6f0cb3e60ece06 *R/assessment_glance.R
 f76f9ce5622a71185ea3da1545de18e0 *R/assessment_inventory.R
 7ba4c6e0bc9c02b855067f1543bd63b8 *R/assessment_list_glance.R
 7e3416e12e0ab9b3bf2ea0d93beb13d9 *R/assessment_list_inventory.R
@@ -85,7 +85,7 @@ f3ef2bc68487cfd6e5400eab01188fd0 *man/transect_phys.Rd
 591f5c9e76d7746dbee7cc7b5fe4b826 *tests/testthat.R
 b080c43627f03f311473b5a653b6dac5 *tests/testthat/test-assessment_coccurrences_summary.R
 96ee7035354ccfc70338882e62b4b37b *tests/testthat/test-assessment_cooccurrences.R
-c0ef577d00b72342940e419e2162fe4d *tests/testthat/test-assessment_glance.R
+49429d1ad4048d405ab9d2ddca4d6bca *tests/testthat/test-assessment_glance.R
 f0c69eba6f8d7b4c59fc05c098e1e49f *tests/testthat/test-assessment_inventory.R
 06dc4a08e57d5406e101fe800cf00d5a *tests/testthat/test-assessment_list_glance.R
 6dd7b2a30538213861fdfad19f9e6db8 *tests/testthat/test-assessment_list_inventory.R
