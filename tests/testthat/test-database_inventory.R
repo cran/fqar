@@ -1,13 +1,17 @@
 test_that("database_inventory works", {
 
-  expect_error(database_inventory("hi"))
+  expect_message(database_inventory("hi"))
+
+  bad <- suppressMessages(database_inventory("hi"))
+  expect_equal(nrow(bad), 0)
+  expect_equal(ncol(bad), 9)
 
   test_man <- database_inventory(test_database)
   expect_equal(ncol(test_man), 9)
   expect_equal(names(test_man)[5], "c")
   expect_equal(typeof(test_man$c), "double")
 
-  skip_on_cran()
+  skip_if_offline()
 
   test_raw <- download_assessment(25002)
   test_auto <- assessment_inventory(test_raw)

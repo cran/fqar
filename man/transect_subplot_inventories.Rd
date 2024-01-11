@@ -33,8 +33,8 @@ species inventories, one per quadrat/subplot.
 }
 \examples{
 \donttest{
- cbg_fen <- download_transect(5932)
- cbg_inventories <- transect_subplot_inventories(cbg_fen)
- }
+cbg_fen <- download_transect(5932)
+cbg_inventories <- transect_subplot_inventories(cbg_fen)
+}
 
 }

@@ -13,20 +13,18 @@
 #'
 #' @return An untidy data frame in the original format of the Universal FQA
 #'   website. Use \code{\link[=transect_glance]{transect_glance()}} for a tidy
-#'   summary, \code{\link[=transect_phys]{transect_phys()}} for a physiognometric
-#'   overview, and \code{\link[=transect_inventory]{transect_inventory()}} for
-#'   species-level data.
+#'   summary, \code{\link[=transect_phys]{transect_phys()}} for a
+#'   physiognometric overview, and
+#'   \code{\link[=transect_inventory]{transect_inventory()}} for species-level
+#'   data.
 #'
 #' @importFrom memoise drop_cache
 #'
 #' @examples
 #' \donttest{
-#' databases <- index_fqa_databases() # Note database 1 is the original 1994 Chicago edition.
+#' databases <- index_fqa_databases() # Database 1 is the original 1994 Chicago edition.
 #' chicago_transects <- index_fqa_transects(1) # CBG Sand prairie swale fen A has id number 5932.
 #' cbg <- download_transect(5932)
-#' cbg_tidy <- transect_glance(cbg)
-#' cbg_species <- transect_inventory(cbg)
-#' cbg_phys <- transect_phys(cbg)
 #' }
 #'
 #' @export
@@ -34,25 +32,14 @@
 
 download_transect <- function(transect_id) {
 
-  out <- tryCatch(download_transect_internal(transect_id),
-                  warning = function(w) {
-                    warning(w)
-                    memoise::drop_cache(download_transect_internal)({{ transect_id }})
-                    return(invisible(NULL))
-                  },
-                  message = function(m) {
-                    message(m)
-                    memoise::drop_cache(download_transect_internal)({{ transect_id }})
-                    return(invisible(NULL))
-                  }
-  )
+  out <- download_transect_internal(transect_id)
 
-  if (is.null(out)){
+  if (nrow(out) == 0){
     memoise::drop_cache(download_transect_internal)({{ transect_id }})
+    return(invisible(out))
   }
 
   out
-
 }
 
 

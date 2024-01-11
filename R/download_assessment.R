@@ -20,38 +20,24 @@
 #' @importFrom memoise drop_cache
 #'
 #' @examples
-#' \donttest{
-#'
-#' databases <- index_fqa_databases()
-#' # Note database 1 is the original 1994 Chicago edition.
+#' databases <- index_fqa_databases() # Database 1 is the original 1994 Chicago edition.
 #'
 #' chicago_assessments <- index_fqa_assessments(1) # Edison dune and swale has id number 25002.
 #' edison <- download_assessment(25002)
 #'
 #' edison_tidy <- assessment_glance(edison)
 #' edison_species <- assessment_inventory(edison)
-#' }
 #'
 #' @export
 
+
 download_assessment <- function(assessment_id) {
 
-  out <- tryCatch(download_assessment_internal(assessment_id),
-                  warning = function(w) {
-                    warning(w)
-                    memoise::drop_cache(download_assessment_internal)({{ assessment_id }})
-                    return(invisible(NULL))
-                  },
-                  message = function(m) {
-                    message(m)
-                    memoise::drop_cache(download_assessment_internal)({{ assessment_id }})
-                    return(invisible(NULL))
-                  }
-  )
+  out <- download_assessment_internal(assessment_id)
 
-  if (is.null(out)){
+  if (nrow(out) == 0){
     memoise::drop_cache(download_assessment_internal)({{ assessment_id }})
-    return(invisible(NULL))
+    return(invisible(out))
   }
 
   out

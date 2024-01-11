@@ -50,8 +50,8 @@ A data frame with 1 row and 54 columns:
    \item native_mean_c (numeric)
    \item total_fqi (numeric)
    \item native_fqi (numeric)
-   \item cover-weighted_fqi (numeric)
-   \item cover-weighted_native_fqi (numeric)
+   \item cover_weighted_fqi (numeric)
+   \item cover_weighted_native_fqi (numeric)
    \item adjusted_fqi (numeric)
    \item c_value_zero (numeric) Percent of c-values 0
    \item c_value_low (numeric) Percent of c-values 1-3
@@ -75,11 +75,11 @@ A data frame with 1 row and 54 columns:
 set obtained from \href{https://universalfqa.org/}{universalfqa.org}.
 }
 \examples{
-\donttest{
 # While transect_glance can be used with a .csv file downloaded manually
 # from the universal FQA website, it is most typically used in combination
 # with download_transect().
 
+\donttest{
 tyler <- download_transect(6352)
 transect_glance(tyler)
 }

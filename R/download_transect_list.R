@@ -8,8 +8,8 @@
 #' @param database_id Numeric identifier of the desired floristic quality
 #'   assessment database, as specified by
 #'   \href{https://universalfqa.org/}{universalfqa.org}. Database id numbers can
-#'   be viewed with the \code{\link[=index_fqa_databases]{index_fqa_databases()}}
-#'   function.
+#'   be viewed with the
+#'   \code{\link[=index_fqa_databases]{index_fqa_databases()}} function.
 #'
 #' @param ... \code{dplyr}-style filtering criteria for the desired transect
 #'   assessments. The following variables may be used:
@@ -32,8 +32,7 @@
 #'
 #' @examples
 #' \donttest{
-#' databases <- index_fqa_databases()
-#' # Note database 1 is the original 1994 Chicago edition.
+#' databases <- index_fqa_databases() # Database 1 is the original 1994 Chicago edition.
 #' dupont <- download_transect_list(1, site == "DuPont Natural Area")
 #' }
 #'
@@ -44,8 +43,8 @@ download_transect_list <- function(database_id, ...) {
 
   transects_summary <- index_fqa_transects(database_id)
 
-  if (is.null(transects_summary)){
-    return(invisible(NULL))
+  if (nrow(transects_summary) == 0){
+    return(invisible(list()))
   }
 
   transects_requested <- transects_summary |>
@@ -67,6 +66,7 @@ download_transect_list <- function(database_id, ...) {
       width = length(transects_requested$id),
       char = "="
     )
+
     for (i in seq_along(transects_requested$id)) {
       results[[i]] <-  download_transect(transects_requested$id[i])
       utils::setTxtProgressBar(pb, i)
@@ -78,7 +78,8 @@ download_transect_list <- function(database_id, ...) {
   }
 
   if (length(results) == 0){
-    warning("No matches found. Empty list returned.", call. = FALSE)
+    message("No matches found.")
+    return(invisible(results))
   }
 
   results

@@ -9,58 +9,58 @@
 #'
 #' @return A data frame with 52 columns:
 #' \itemize{
-#'    \item title (character)
-#'    \item date (date)
-#'    \item site_name (character)
-#'    \item city (character)
-#'    \item county (character)
-#'    \item state (character)
-#'    \item country (character)
-#'    \item fqa_db_region (character)
-#'    \item fqa_db_publication_year (character)
-#'    \item fqa_db_description (character)
-#'    \item custom_fqa_db_name (character)
-#'    \item custom_fqa_db_description (character)
-#'    \item practitioner (character)
-#'    \item latitude (character)
-#'    \item longitude (character)
-#'    \item weather_notes (character)
-#'    \item duration_notes (character)
-#'    \item community_type_notes (character)
-#'    \item other_notes (character)
-#'    \item private_public (character)
-#'    \item total_mean_c (numeric)
-#'    \item native_mean_c (numeric)
-#'    \item total_fqi (numeric)
-#'    \item native_fqi (numeric)
-#'    \item adjusted_fqi (numeric)
-#'    \item c_value_zero (numeric) Percent of c-values 0
-#'    \item c_value_low (numeric) Percent of c-values 1-3
-#'    \item c_value_mid (numeric) Percent of c-values 4-6
-#'    \item c_value_high (numeric) Percent of c-values 7-10
-#'    \item native_tree_mean_c (numeric)
-#'    \item native_shrub_mean_c (numeric)
-#'    \item native_herbaceous_mean_c (numeric)
-#'    \item total_species (numeric)
-#'    \item native_species (numeric)
-#'    \item non_native_species
-#'    \item mean_wetness (numeric)
-#'    \item native_mean_wetness (numeric)
-#'    \item tree (numeric)
-#'    \item shrub (numeric)
-#'    \item vine (numeric)
-#'    \item forb (numeric)
-#'    \item grass (numeric)
-#'    \item sedge (numeric)
-#'    \item rush (numeric)
-#'    \item fern (numeric)
-#'    \item bryophyte (numeric)
-#'    \item annual (numeric)
-#'    \item perennial (numeric)
-#'    \item biennial (numeric)
-#'    \item native_annual (numeric)
-#'    \item native_perennial (numeric)
-#'    \item native_biennial (numeric)
+#'    title (character)
+#'    date (date)
+#'    site_name (character)
+#'    city (character)
+#'    county (character)
+#'    state (character)
+#'    country (character)
+#'    fqa_db_region (character)
+#'    fqa_db_publication_year (character)
+#'    fqa_db_description (character)
+#'    custom_fqa_db_name (character)
+#'    custom_fqa_db_description (character)
+#'    practitioner (character)
+#'    latitude (character)
+#'    longitude (character)
+#'    weather_notes (character)
+#'    duration_notes (character)
+#'    community_type_notes (character)
+#'    other_notes (character)
+#'    private_public (character)
+#'    total_mean_c (numeric)
+#'    native_mean_c (numeric)
+#'    total_fqi (numeric)
+#'    native_fqi (numeric)
+#'    adjusted_fqi (numeric)
+#'    c_value_zero (numeric) Percent of c-values 0
+#'    c_value_low (numeric) Percent of c-values 1-3
+#'    c_value_mid (numeric) Percent of c-values 4-6
+#'    c_value_high (numeric) Percent of c-values 7-10
+#'    native_tree_mean_c (numeric)
+#'    native_shrub_mean_c (numeric)
+#'    native_herbaceous_mean_c (numeric)
+#'    total_species (numeric)
+#'    native_species (numeric)
+#'    non_native_species (numeric)
+#'    mean_wetness (numeric)
+#'    native_mean_wetness (numeric)
+#'    tree (numeric)
+#'    shrub (numeric)
+#'    vine (numeric)
+#'    forb (numeric)
+#'    grass (numeric)
+#'    sedge (numeric)
+#'    rush (numeric)
+#'    fern (numeric)
+#'    bryophyte (numeric)
+#'    annual (numeric)
+#'    perennial (numeric)
+#'    biennial (numeric)
+#'    native_annual (numeric)
+#'    native_perennial (numeric)
+#'    native_biennial (numeric)
 #' }
 #'
 #' @import dplyr tidyr
@@ -76,32 +76,89 @@
 #'
 #' @export
 
+
 assessment_glance <- function(data_set) {
 
-  if (is.null(data_set)) {
-    message("data_set is NULL. Returning NULL.")
-    return(invisible(NULL))
-    }
+  df_bad <- data.frame(title = character(0),
+                       date = numeric(0),
+                       site_name = character(0),
+                       city = character(0),
+                       county = character(0),
+                       state = character(0),
+                       country = character(0),
+                       fqa_db_region = character(0),
+                       fqa_db_publication_year = character(0),
+                       fqa_db_description = character(0),
+                       custom_fqa_db_name = character(0),
+                       custom_fqa_db_description = character(0),
+                       practitioner = character(0),
+                       latitude = character(0),
+                       longitude = character(0),
+                       weather_notes = character(0),
+                       duration_notes = character(0),
+                       community_type_notes = character(0),
+                       other_notes = character(0),
+                       private_public = character(0),
+                       total_mean_c = numeric(0),
+                       native_mean_c = numeric(0),
+                       total_fqi = numeric(0),
+                       native_fqi = numeric(0),
+                       adjusted_fqi = numeric(0),
+                       c_value_zero = numeric(0),
+                       c_value_low = numeric(0),
+                       c_value_mid = numeric(0),
+                       c_value_high = numeric(0),
+                       native_tree_mean_c = numeric(0),
+                       native_shrub_mean_c = numeric(0),
+                       native_herbaceous_mean_c = numeric(0),
+                       total_species = numeric(0),
+                       native_species = numeric(0),
+                       non_native_species = numeric(0),
+                       mean_wetness = numeric(0),
+                       native_mean_wetness = numeric(0),
+                       tree = numeric(0),
+                       shrub = numeric(0),
+                       vine = numeric(0),
+                       forb = numeric(0),
+                       grass = numeric(0),
+                       sedge = numeric(0),
+                       rush = numeric(0),
+                       fern = numeric(0),
+                       bryophyte = numeric(0),
+                       annual = numeric(0),
+                       perennial = numeric(0),
+                       biennial = numeric(0),
+                       native_annual = numeric(0),
+                       native_perennial = numeric(0),
+                       native_biennial = numeric(0)
+  )
 
-  if (!is.data.frame(data_set)) {
-    stop(
-      "data_set must be a dataframe obtained from the universalFQA.org website. Type ?download_assessment for help.",
-      call. = FALSE
-    )
+  df_bad$date <- as.Date(df_bad$date)
+
+  if (is.null(data_set)) {
+    message("data_set is NULL. Empty data frame returned.")
+    return(invisible(df_bad))
   }
 
-  if (ncol(data_set) == 0) {
-    stop(
-      "data_set must be a dataframe obtained from the universalFQA.org website. Type ?download_assessment for help.",
-      call. = FALSE
+  if (!is.data.frame(data_set)) {
+    message(
+      "data_set must be a dataframe obtained from the universalFQA.org website. Type ?download_assessment for help."
     )
+    return(invisible(df_bad))
+  }
+
+  if (nrow(data_set) == 0) {
+    message(
+      "Input data_set is empty."
+    )
+    return(invisible(df_bad))
   }
 
   if (!("Species Richness:" %in% data_set[[1]])) {
-    stop(
-      "data_set must be a dataframe obtained from the universalFQA.org website. Type ?download_assessment for help.",
-      call. = FALSE
+    message(
+      "data_set must be a dataframe obtained from the universalFQA.org website. Type ?download_assessment for help."
     )
+    return(invisible(df_bad))
   }
 
   if (ncol(data_set) == 1) {
@@ -232,5 +289,7 @@ assessment_glance <- function(data_set) {
     "native_perennial",
     "native_biennial"
   )
+
   final
+
 }

@@ -1,10 +1,12 @@
 test_that("transect_subplot_inventories works", {
 
+  expect_message(transect_subplot_inventories("hi"))
+  expect_message(transect_subplot_inventories(faithful))
+
+  skip_if_offline()
+
   test_transect <- download_transect(5932)
   inv <- transect_subplot_inventories(test_transect)
-
-  expect_error(transect_subplot_inventories("hi"))
-  expect_error(transect_subplot_inventories(faithful))
 
   expect_equal(length(inv), 6)
   expect_equal(ncol(inv[[1]]), 9)
@@ -12,3 +14,5 @@ test_that("transect_subplot_inventories works", {
   expect_equal(typeof(inv[[1]]$scientific_name), "character")
   expect_equal(typeof(inv[[1]]$c), "double")
 })
+
+# need to add input for all downloading functions to allow testing offline behavior

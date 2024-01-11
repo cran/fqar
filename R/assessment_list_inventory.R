@@ -1,8 +1,8 @@
 #' Obtain species details for a list of floristic quality assessments
 #'
-#' \code{assessment_list_inventory()} returns a list of data frames, each of which
-#' consists of all plant species included in a floristic quality assessment
-#' obtained from \href{https://universalfqa.org/}{universalfqa.org}.
+#' \code{assessment_list_inventory()} returns a list of data frames, each of
+#' which consists of all plant species included in a floristic quality
+#' assessment obtained from \href{https://universalfqa.org/}{universalfqa.org}.
 #'
 #' @param assessment_list  A list of data sets downloaded from
 #'   \href{https://universalfqa.org/}{universalfqa.org}, typically using
@@ -22,24 +22,36 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' # While assessment_list_inventory can be used with a list of .csv file downloaded
 #' # manually from the universal FQA website, it is most typically used
 #' # in combination with download_assessment_list().
 #'
-#' ontario <- download_assessment_list(database = 2)
-#' ontario_invs <- assessment_list_inventory(ontario)
+#' \donttest{
+#' maine <- download_assessment_list(database = 56)
+#' maine_invs <- assessment_list_inventory(maine)
 #' }
 #'
 #' @export
 
 
 assessment_list_inventory <- function(assessment_list) {
+
+  bad_df <- data.frame(scientific_name = character(0),
+                       family = character(0),
+                       acronym = character(0),
+                       nativity = character(0),
+                       c = numeric(0),
+                       w = numeric(0),
+                       physiognomy = character(0),
+                       duration = character(0),
+                       common_name = character(0)
+  )
+
   if (!is_assessment_list(assessment_list)) {
-    stop(
-      "assessment_list must be a list of dataframes obtained from universalFQA.org. Type ?download_assessment_list for help.",
-      call. = FALSE
+    message(
+      "assessment_list must be a list of dataframes obtained from universalFQA.org. Type ?download_assessment_list for help."
     )
+    return(invisible(bad_df))
   }
 
   applied <- lapply(assessment_list,

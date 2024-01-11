@@ -1,8 +1,8 @@
 #' Obtain species details for a list of transect assessments
 #'
 #' \code{transect_list_inventory()} returns a list of data frames, each of which
-#' consists of all plant species included in a floristic quality assessment of a transect
-#' obtained from \href{https://universalfqa.org/}{universalfqa.org}.
+#' consists of all plant species included in a floristic quality assessment of a
+#' transect obtained from \href{https://universalfqa.org/}{universalfqa.org}.
 #'
 #' @param transect_list  A list of data sets downloaded from
 #'   \href{https://universalfqa.org/}{universalfqa.org}, typically using
@@ -41,10 +41,10 @@
 transect_list_inventory <- function(transect_list) {
 
   if (!is_transect_list(transect_list)) {
-    stop(
-      "transect_list must be a list of dataframes obtained from universalFQA.org. Type ?download_transect_list for help.",
-      call. = FALSE
+    message(
+      "transect_list must be a list of dataframes obtained from universalFQA.org. Type ?download_transect_list for help."
     )
+    return(invisible(list()))
   }
 
   applied <- lapply(transect_list,

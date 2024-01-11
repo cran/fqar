@@ -1,6 +1,10 @@
 test_that("transect_glance works", {
 
-  expect_error(transect_glance("hi"))
+  expect_message(transect_glance("hi"))
+
+  bad <- suppressMessages(transect_glance("hi"))
+  expect_equal(nrow(bad), 0)
+  expect_equal(ncol(bad), 54)
 
   test_manual <- transect_glance(test_transect) # manual download
   expect_equal(ncol(test_manual), 54)
@@ -9,7 +13,7 @@ test_that("transect_glance works", {
   expect_equal(typeof(test_manual$total_mean_c), "double")
   expect_equal(test_manual[[25]], "Transect")
 
-  skip_on_cran()
+  skip_if_offline()
 
   test_normal <- download_transect(4492) |>
     transect_glance()  # normal database

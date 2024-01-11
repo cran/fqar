@@ -1,7 +1,7 @@
 #' Obtain tidy summary information for a floristic quality database
 #'
-#' \code{database_glance()} tidies a floristic quality database
-#' obtained from \href{https://universalfqa.org/}{universalfqa.org}.
+#' \code{database_glance()} tidies a floristic quality database obtained from
+#' \href{https://universalfqa.org/}{universalfqa.org}.
 #'
 #' @param database A database downloaded from
 #'   \href{https://universalfqa.org/}{universalfqa.org} either manually or using
@@ -31,18 +31,32 @@
 #'
 #' @export
 
+
 database_glance <- function(database) {
+
+  bad_df <- data.frame(
+    region = character(0),
+    year = numeric(0),
+    description = character(0),
+    total_species = numeric(0),
+    native_species = numeric(0),
+    non_native_species = numeric(0),
+    total_mean_c = numeric(0),
+    native_mean_c = numeric(0)
+  )
+
   if (!is.data.frame(database)) {
-    stop(
-      "database must be a data frame obtained from the universalFQA.org website. Type ?download_assessment for help.",
-      call. = FALSE
+    message(
+      "database must be a data frame obtained from the universalFQA.org website. Type ?download_database for help."
     )
+    return(invisible(bad_df))
   }
+
   if (ncol(database) == 0) {
-    stop(
-      "database must be a dataframe obtained from the universalFQA.org website. Type ?download_assessment for help.",
-      call. = FALSE
+    message(
+      "database must be a dataframe obtained from the universalFQA.org website. Type ?download_database for help."
     )
+    return(invisible(bad_df))
   }
 
   if (ncol(database) == 1) {
@@ -60,10 +74,10 @@ database_glance <- function(database) {
   }
 
   if (!("Total Species:" %in% database[[1]])) {
-    stop(
-      "database must be a data frame obtained from the universalFQA.org website. Type ?download_assessment for help.",
-      call. = FALSE
+    message(
+      "database must be a data frame obtained from the universalFQA.org website. Type ?download_database for help."
     )
+    return(invisible(bad_df))
   }
 
   sm <- database[1:9, 1:2]
@@ -86,6 +100,7 @@ database_glance <- function(database) {
     "total_mean_c",
     "native_mean_c"
   )
+
   wide
 
 }

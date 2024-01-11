@@ -19,38 +19,25 @@
 #' @importFrom memoise drop_cache
 #'
 #' @examples
-#' \donttest{
-#' databases <- index_fqa_databases()
-#' # Note database 1 is the original 1994 Chicago edition.
+#' databases <- index_fqa_databases() # Database 1 is the original 1994 Chicago edition.
 #'
 #' chicago_database <- download_database(1)
-#' }
 #'
 #' @export
 
 
 download_database <- function(database_id) {
 
-  out <- tryCatch(download_database_internal(database_id),
-                  warning = function(w) {
-                    warning(w)
-                    memoise::drop_cache(download_database_internal)({{ database_id }})
-                    return(invisible(NULL))
-                  },
-                  message = function(m) {
-                    message(m)
-                    memoise::drop_cache(download_database_internal)({{ database_id }})
-                    return(invisible(NULL))
-                  }
-  )
+  out <- download_database_internal(database_id)
 
-  if (is.null(out)){
+  if (nrow(out) == 0 | out$V2[5] == 0){
     memoise::drop_cache(download_database_internal)({{ database_id }})
+    return(invisible(out))
   }
 
   out
-
 }
+
 
 
 

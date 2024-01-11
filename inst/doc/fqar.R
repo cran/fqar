@@ -1,4 +1,4 @@
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  databases <- index_fqa_databases()
 #  head(databases)
 #  #> # A tibble: 6 × 4
@@ -11,7 +11,7 @@
 #  #> 5         204 "Atlantic Coastal Pine Barrens (8.5…  2021 Faber-Lang…
 #  #> 6           1 "Chicago Region"                      1994 Swink, F. …
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  missouri_fqas <- index_fqa_assessments(database_id = 63)
 #  head(missouri_fqas)
 #  #> # A tibble: 6 × 5
@@ -24,7 +24,7 @@
 #  #> 5 29622 Interior Woodlands Survey      2023-05-26 WS I… Nathan Aaron
 #  #> 6 29750 Wetland B                      2023-05-24 STL … Marion Well…
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  missouri_transects <- index_fqa_transects(database_id = 63)
 #  head(missouri_transects)
 #  #> # A tibble: 6 × 5
@@ -37,25 +37,25 @@
 #  #> 5  8052 Golden DNA23      2023-06-28 DNA Floristic Sam… Lord/Sutton
 #  #> 6  8053 Lindens DNA23     2023-06-28 DNA Floristic Sam… Lord/Sutton
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  grasshopper <- download_assessment(assessment_id = 25961)
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  ambrose <- download_assessment_list(database_id = 63,
 #                                      site == "Ambrose Farm")
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  class(ambrose)
 #  #> [1] "list"
 #  length(ambrose)
 #  #> [1] 3
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  rock_garden <- download_transect(transect_id = 6875)
 #  golden <- download_transect_list(database_id = 63,
 #                                   site == "Golden Prairie")
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  grasshopper_species <- assessment_inventory(grasshopper)
 #  glimpse(grasshopper_species)
 #  #> Rows: 317
@@ -70,7 +70,7 @@
 #  #> $ duration        <chr> "perennial", "perennial", "perennial", "pe…
 #  #> $ common_name     <chr> "red maple", "sugar maple", "yarrow", "swe…
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  grasshopper_summary <- assessment_glance(grasshopper)
 #  names(grasshopper_summary)
 #  #>  [1] "title"                     "date"
@@ -100,15 +100,15 @@
 #  #> [49] "biennial"                  "native_annual"
 #  #> [51] "native_perennial"          "native_biennial"
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  ambrose_summary <- assessment_list_glance(ambrose)
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  rock_garden_species <- transect_inventory(rock_garden)
 #  rock_garden_summary <- transect_glance(rock_garden)
 #  golden_summary <- transect_list_glance(golden)
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  rock_garden_phys <- transect_phys(rock_garden)
 #  glimpse(rock_garden_phys)
 #  #> Rows: 6
@@ -120,7 +120,7 @@
 #  #> $ relative_coverage_percent         <dbl> 26.1, 17.2, 7.5, 5.2, 3.…
 #  #> $ relative_importance_value_percent <dbl> 38.9, 20.5, 8.3, 4.0, 2.…
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  # Obtain a tidy data frame of all co-occurrences in the 1995 Southern Ontario database:
 #  ontario <- download_assessment_list(database = 2)
 #  
@@ -133,7 +133,7 @@
 #  # Summarize co-occurrences in this database, one row per target species:
 #  ontario_cooccurrences <- assessment_cooccurrences_summary(ontario_invs)
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  aster_profile <- species_profile("Aster lateriflorus",
 #                                   ontario_invs,
 #                                   native = TRUE)
@@ -157,7 +157,7 @@
 #                       ontario_invs,
 #                       native = TRUE)
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  ggplot(missouri, aes(x = native_species,
 #                       y = native_mean_c)) +
 #    geom_point() +

@@ -1,7 +1,11 @@
 test_that("database_glance works", {
 
-  expect_error(database_glance("hi"))
-  expect_error(database_glance(faithful))
+  expect_message(database_glance("hi"))
+  expect_message(database_glance(faithful))
+
+  empty <- suppressMessages(database_glance("hi"))
+  expect_equal(nrow(empty), 0)
+  expect_equal(ncol(empty), 8)
 
   test_man <- database_glance(test_database)
   expect_equal(ncol(test_man), 8)
@@ -10,7 +14,7 @@ test_that("database_glance works", {
   expect_equal(names(test_man)[5], "native_species")
   expect_equal(typeof(test_man$total_species), "double")
 
-  skip_on_cran()
+  skip_if_offline()
 
   test_auto <- download_database(1)
   test <- database_glance(test_auto)
