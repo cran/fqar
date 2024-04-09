@@ -14,14 +14,19 @@ test_that("database_glance works", {
   expect_equal(names(test_man)[5], "native_species")
   expect_equal(typeof(test_man$total_species), "double")
 
-  skip_if_offline()
+  test_auto <- suppressMessages(download_database(1))
 
-  test_auto <- download_database(1)
-  test <- database_glance(test_auto)
+  if (nrow(test_auto != 0)) {
+    # for when server responds
+    test <- suppressMessages(database_glance(test_auto))
 
-  expect_equal(ncol(test), 8)
-  expect_equal(nrow(test), 1)
-  expect_equal(names(test)[1], "region")
-  expect_equal(names(test)[5], "native_species")
-  expect_equal(typeof(test$total_species), "double")
+    expect_equal(ncol(test), 8)
+    expect_equal(nrow(test), 1)
+    expect_equal(names(test)[1], "region")
+    expect_equal(names(test)[5], "native_species")
+    expect_equal(typeof(test$total_species), "double")
+  } else {
+    # for when server does not respond
+    expect_message(database_glance(test_auto))
+  }
 })

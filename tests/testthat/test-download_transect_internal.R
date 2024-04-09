@@ -7,11 +7,10 @@ test_that("download_transect_internal works", {
   expect_equal(nrow(null_output), 0)
   expect_true(memoise::has_cache(download_transect_internal)(-40000))
 
-  skip_if_offline()
-
-  test_tr <- download_transect_internal(6322)
+  test_tr <- suppressMessages(download_transect_internal(6322))
   expect_equal(ncol(test_tr), 14)
   expect_equal(class(test_tr), c("tbl_df",
                                  "tbl",
                                  "data.frame"))
+  # expect_gt(nrow(test_tr), 1) assumes response from server
 })
