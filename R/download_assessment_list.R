@@ -26,7 +26,8 @@
 #'   \code{\link[=assessment_list_glance]{assessment_list_glance()}} for a tidy
 #'   summary.
 #'
-#' @import dplyr utils
+#' @import dplyr
+#' @importFrom utils txtProgressBar
 #' @importFrom memoise has_cache
 #' @importFrom rlang is_interactive
 #'
@@ -46,6 +47,7 @@ download_assessment_list <- function(database_id, ...) {
 
   if (nrow(inventories_summary) == 0){
     return(invisible(list()))
+    message("No data returned for specified database.")
   }
 
   inventories_requested <- inventories_summary |>
@@ -67,6 +69,7 @@ download_assessment_list <- function(database_id, ...) {
       width = length(inventories_requested$id),
       char = "="
     )
+
     for (i in seq_along(inventories_requested$id)) {
       results[[i]] <-  download_assessment(inventories_requested$id[i])
       utils::setTxtProgressBar(pb, i)
@@ -79,6 +82,7 @@ download_assessment_list <- function(database_id, ...) {
 
   if (length(results) == 0){
     message("No matches found. Empty list returned.")
+    return(invisible(results))
   }
 
   results
