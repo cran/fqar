@@ -1,7 +1,7 @@
 Package: fqar
 Type: Package
 Title: Floristic Quality Assessment Tools for R
-Version: 0.5.3
+Version: 0.5.4
 Authors@R: c(
   person("Andrew", "Gard", , email = "agard@lakeforest.edu", role = c("aut", "cre"),
     comment = c(ORCID = "0000-0003-4434-0755")),
@@ -13,11 +13,11 @@ Description: Tools for downloading and analyzing floristic quality assessment da
   about floristic quality assessment and the associated database.  
 License: MIT + file LICENSE
 Encoding: UTF-8
-Language: en_US
+Language: en-US
 LazyData: true
 Imports: dplyr, ggplot2, httr, jsonlite, memoise, rlang, tidyr,
         tidyselect
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Suggests: knitr, rmarkdown, testthat (>= 3.0.0)
 Depends: R (>= 4.1.0)
 VignetteBuilder: knitr
@@ -25,10 +25,10 @@ URL: https://github.com/equitable-equations/fqar/
 BugReports: https://github.com/equitable-equations/fqar/issues
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2024-04-13 20:30:08 UTC; eloise
+Packaged: 2024-10-06 16:33:41 UTC; eloise
 Author: Andrew Gard [aut, cre] (<https://orcid.org/0000-0003-4434-0755>),
   Alexia Myers [aut],
   Irene Luwabelwa [aut]
 Maintainer: Andrew Gard <agard@lakeforest.edu>
 Repository: CRAN
-Date/Publication: 2024-04-13 21:50:02 UTC
+Date/Publication: 2024-10-06 18:00:02 UTC

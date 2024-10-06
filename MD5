@@ -1,4 +1,4 @@
-377a671acc4ce60805cc1ce699de1506 *DESCRIPTION
+31be77af7bb5a06f4b05abc889784c74 *DESCRIPTION
 f3372fe5764e62c0b31a8f4aa0cd23d3 *LICENSE
 8e8f25ea5f2fdd30bd027176940c6c21 *NAMESPACE
 e4dd35c016034ebf90579d0c64d3772b *NEWS.md
@@ -15,7 +15,7 @@ ff69f7851127e139dfb8dca3e8c8a986 *R/download_assessment.R
 9bde112dd6e0b45ec8f1533dca3c6b6e *R/download_assessment_internal.R
 99ce251ffe4d7487b5d61bf3468e009f *R/download_assessment_list.R
 f2dfab46496df036839d7c247ef4ed4b *R/download_database.R
-1265aff9e64b52853d8b7ce988d27f57 *R/download_database_internal.R
+7eaf61ec53a4e314d26cb771029ede2e *R/download_database_internal.R
 e5f2f91ba998c7205a592887ae29f024 *R/download_transect.R
 fd6eb3021a8e3366b06446263829b0f3 *R/download_transect_internal.R
 c0f221f4ec3f7444ae7779857677798d *R/download_transect_list.R
@@ -46,12 +46,13 @@ fc4abd5df448d282001aa16c21dda236 *R/sysdata.rda
 1e32f314afd27a8673a47a8f59d87435 *R/transect_list_inventory.R
 49d4480a4635b03cf475f31d7784500e *R/transect_phys.R
 6a3f0dc451b8f9058d3da82193eceddb *R/transect_subplot_inventories.R
-c5e6478a7366e0d4996e24336457aecb *build/vignette.rds
+5f45cf199fe998b24cba51380ab05da2 *build/vignette.rds
 59ae7f4f1bd65b845917f45ca4865b1c *data/chicago.rda
 792552ee177e47ae559c6e9e0d697af5 *data/missouri.rda
+6ea997de1ccee0c3d733776250769cfb *inst/CITATION
 e6ed81add495c71930685cadaeecefff *inst/doc/fqar.R
 b7c37cd7a6bd25ec2392184efe6284ef *inst/doc/fqar.Rmd
-bef1e0852d068889c67654d1ef0ca632 *inst/doc/fqar.html
+2983d3259729997adb4ccec9163d92cc *inst/doc/fqar.html
 8b9be8ce048636594e6422a329266ce5 *man/assessment_cooccurrences.Rd
 e6da949993c041b62c7e64a021a1744f *man/assessment_cooccurrences_summary.Rd
 87ecfa9d5e19cbb5f6cc42d3be7d4526 *man/assessment_glance.Rd
@@ -114,7 +115,7 @@ dea8b8202795a23301f5ba2629b622e7 *tests/testthat/test-index_fqa_transects.R
 5c393339d11859a36d62185a740af358 *tests/testthat/test-is_inventory_list.R
 209b8b870e9331713f116ff4c8c35254 *tests/testthat/test-is_transect.R
 cc253d8751c07599487204f0772402a5 *tests/testthat/test-is_transect_list.R
-7cfa56a1f22d28910d0e2a03d880948c *tests/testthat/test-species_acronym.R
+0039e0fbf0d1d26a928eb12249d0754c *tests/testthat/test-species_acronym.R
 da7c8c086606258eb275b3e43b24ec8a *tests/testthat/test-species_c.R
 b37520d06e5e2766196d2073039be1b6 *tests/testthat/test-species_common_name.R
 cba19985d953ec281fa2e3a3e743cd12 *tests/testthat/test-species_nativity.R
@@ -124,7 +125,7 @@ aaa2d124fbe924c6c40908c27ee5440d *tests/testthat/test-species_profile_plot.R
 cc61ee7bb9b61133ed67ab441e374202 *tests/testthat/test-species_w.R
 eaa2ffb27fc7f49c40872a8ef5576528 *tests/testthat/test-transect_glance.R
 65c4aada053828735828316a3372e12e *tests/testthat/test-transect_inventory.R
-a47a9b723aafcc6a8059380086ccd09c *tests/testthat/test-transect_list_glance.R
+545ba342d90123fabbca80f3cc6997aa *tests/testthat/test-transect_list_glance.R
 4174106f40a4ea57b8aeba59672b1d18 *tests/testthat/test-transect_list_inventory.R
 dc5e048b4a6a885765fe853c70d3381e *tests/testthat/test-transect_phys.R
 bb2949162c383835c250fbc0062da532 *tests/testthat/test-transect_subplot_inventories.R
