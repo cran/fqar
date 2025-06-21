@@ -10,9 +10,11 @@
 #'   \href{https://universalfqa.org/}{universalfqa.org}. ID numbers for transect
 #'   assessments in specified databases can be viewed with the
 #'   \code{\link[=index_fqa_transects]{index_fqa_transects()}} function.
+#' @param timeout Number of seconds to query UniversalFQA before timing out.
 #'
 #' @return An untidy data frame in the original format of the Universal FQA
-#'   website. Use \code{\link[=transect_glance]{transect_glance()}} for a tidy
+#'   website, except that the transect id number has been appended in the
+#'   first row.. Use \code{\link[=transect_glance]{transect_glance()}} for a tidy
 #'   summary, \code{\link[=transect_phys]{transect_phys()}} for a
 #'   physiognometric overview, and
 #'   \code{\link[=transect_inventory]{transect_inventory()}} for species-level
@@ -24,15 +26,17 @@
 #' \donttest{
 #' databases <- index_fqa_databases() # Database 1 is the original 1994 Chicago edition.
 #' chicago_transects <- index_fqa_transects(1) # CBG Sand prairie swale fen A has id number 5932.
-#' cbg <- download_transect(5932)
+#' cbg <- download_transect(5932, timeout = 10)
 #' }
 #'
 #' @export
 
 
-download_transect <- function(transect_id) {
+download_transect <- function(transect_id,
+                              timeout = 4) {
 
-  out <- download_transect_internal(transect_id)
+  out <- download_transect_internal(transect_id,
+                                    timeout)
 
   if (nrow(out) == 0){
     memoise::drop_cache(download_transect_internal)({{ transect_id }})

@@ -10,9 +10,11 @@
 #'   \href{https://universalfqa.org/}{universalfqa.org}. ID numbers for
 #'   assessments in specified databases can be viewed with the
 #'   \code{\link[=index_fqa_assessments]{index_fqa_assessments()}} function.
+#' @param timeout Number of seconds to query UniversalFQA before timing out.
 #'
 #' @return An untidy data frame in the original format of the Universal FQA
-#'   website. Use \code{\link[=assessment_glance]{assessment_glance()}} for a
+#'   website, except that the assessment id number has been appended in the
+#'   first row. Use \code{\link[=assessment_glance]{assessment_glance()}} for a
 #'   tidy summary and
 #'   \code{\link[=assessment_inventory]{assessment_inventory()}} for
 #'   species-level data.
@@ -28,15 +30,16 @@
 #' edison <- download_assessment(25002)
 #'
 #' edison_tidy <- assessment_glance(edison)
-#' edison_species <- assessment_inventory(edison)
 #' }
 #'
 #' @export
 
 
-download_assessment <- function(assessment_id) {
+download_assessment <- function(assessment_id,
+                                timeout = 4) {
 
-  out <- download_assessment_internal(assessment_id)
+  out <- download_assessment_internal(assessment_id,
+                                      timeout)
 
   if (nrow(out) == 0){
     memoise::drop_cache(download_assessment_internal)({{ assessment_id }})
